@@ -45,7 +45,7 @@ func ExtrairUsuarioID(r *http.Request) (uint64, error) {
 		return 0, erro
 	}
 
-	if  permissoes, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+	if permissoes, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 		usuarioID, erro := strconv.ParseUint(fmt.Sprintf("%.0f", permissoes["usuarioId"]), 10, 64)
 		if erro != nil {
 			return 0, erro
@@ -58,8 +58,7 @@ func ExtrairUsuarioID(r *http.Request) (uint64, error) {
 }
 
 func extrairToken(r *http.Request) string {
-	token := r. Header.Get("Authorization")
-
+	token := r.Header.Get("Authorization")
 
 	if len(strings.Split(token, " ")) == 2 {
 		return strings.Split(token, " ")[1]
